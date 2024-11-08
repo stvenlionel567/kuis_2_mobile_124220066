@@ -56,7 +56,7 @@ class Homepage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
-                  "Selamat Datang di Aplikasi Serba Ada",
+                  "Selamat Datang di Kuis 2 Mobile",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(

@@ -56,21 +56,53 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Nama: Dejan Azul Ultamar",
-                      style: TextStyle(fontSize: 25),
+                    Row(
+                      children: [
+                        Text(
+                          "Nama   :",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        Text(
+                          " Steven Lionel",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "NIM: 124220138",
-                      style: TextStyle(fontSize: 25),
+                    Row(
+                      children: [
+                        Text(
+                          "NIM      :",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        Text(
+                          " 124220066",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "Tempat & Tanggal Lahir: Padang, 24 November 2004",
-                      style: TextStyle(fontSize: 25),
+                    Row(
+                      children: [
+                        Text(
+                          "TTL      :",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        Text(
+                          " Jakarta, 02 Okt 2003",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "Hobi: Membaca Buku",
-                      style: TextStyle(fontSize: 25),
+                    Row(
+                      children: [
+                        Text(
+                          "Hobi     :",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        Text(
+                          " Melukis",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
                     ),
                   ]),
             ),
