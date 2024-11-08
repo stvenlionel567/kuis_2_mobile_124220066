@@ -66,9 +66,9 @@ class _PiramidaState extends State<Piramida> {
                     return null;
                   },
                   controller: _baseController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Panjang sisi alas (m)',
-                    border: const OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 2),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -90,9 +90,9 @@ class _PiramidaState extends State<Piramida> {
                     return null;
                   },
                   controller: _heightController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Tinggi piramida (m)',
-                    border: const OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 2),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -117,7 +117,7 @@ class _PiramidaState extends State<Piramida> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.black,
-                      side: BorderSide(color: Colors.black, width: 2),
+                      side: const BorderSide(color: Colors.black, width: 2),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
                     child: const Text(

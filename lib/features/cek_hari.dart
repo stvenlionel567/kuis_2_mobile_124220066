@@ -58,7 +58,7 @@ class _CekHariState extends State<CekHari> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text('Cek Hari Berdasarkan Nomor'),
+          title: const Text('Cek Hari Berdasarkan Nomor'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -75,9 +75,9 @@ class _CekHariState extends State<CekHari> {
                     return null;
                   },
                   controller: _numberController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Masukkan nomor hari (1-7)',
-                    border: const OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black, width: 2),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -102,10 +102,10 @@ class _CekHariState extends State<CekHari> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.black,
-                        side: BorderSide(color: Colors.black, width: 2),
+                        side: const BorderSide(color: Colors.black, width: 2),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Cek Hari",
                         style: TextStyle(fontSize: 15),
                       ),
@@ -115,7 +115,7 @@ class _CekHariState extends State<CekHari> {
                 if (dayResult != null)
                   Text(
                     dayResult!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),

@@ -14,86 +14,122 @@ class _KonversiWaktuState extends State<KonversiWaktu> {
   String? convertedWIT;
   String? convertedWITA;
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
+  final TextEditingController _timeController = TextEditingController();
 
-    if (picked != null) {
+// Fungsi konversi waktu
+  void _convertTimeZones(String inputTime) {
+    try {
+      final inputFormat = DateFormat('HH:mm');
+      final parsedTime = inputFormat.parse(inputTime);
+
       final now = DateTime.now();
-      setState(() {
-        selectedTime =
-            DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
-        _convertTimeZones();
-      });
-    }
-  }
+      selectedTime = DateTime(
+          now.year, now.month, now.day, parsedTime.hour, parsedTime.minute);
 
-  void _convertTimeZones() {
-    if (selectedTime != null) {
-      // WIB is UTC+7
+      // Konversi waktu
       final wibTime = selectedTime!.toUtc().add(const Duration(hours: 7));
       convertedWIB = DateFormat('HH:mm').format(wibTime);
 
-      // WITA is UTC+8
       final witaTime = selectedTime!.toUtc().add(const Duration(hours: 8));
       convertedWITA = DateFormat('HH:mm').format(witaTime);
 
-      // WIT is UTC+9
       final witTime = selectedTime!.toUtc().add(const Duration(hours: 9));
       convertedWIT = DateFormat('HH:mm').format(witTime);
+
+      setState(() {});
+    } catch (e) {
+      // Format salah
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Format Salah'),
+          content:
+              const Text('Pastikan format waktu adalah HH:mm, misal 13:45'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
+      child: Scaffold(
         backgroundColor: Colors.white,
-        title: const Text('Konversi Waktu'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => _selectTime(context),
-                  child: const Text('Pilih Waktu'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
-                    side: const BorderSide(color: Colors.black, width: 2),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const Text('Konversi Waktu'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: TextField(
+                    focusNode: FocusNode(),
+                    controller: _timeController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2),
+                      ),
+                      labelText: 'Masukkan Waktu (HH:mm)',
+                    ),
+                    keyboardType: TextInputType.datetime,
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              if (selectedTime != null) ...[
-                Text(
-                  'Waktu Terpilih: ${DateFormat('HH:mm').format(selectedTime!)}',
-                  style: const TextStyle(fontSize: 25),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      final inputTime = _timeController.text;
+                      _convertTimeZones(inputTime);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      side: const BorderSide(color: Colors.black, width: 2),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text('Konversi Waktu'),
+                  ),
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  'WIB: $convertedWIB',
-                  style: const TextStyle(fontSize: 25),
-                ),
-                Text(
-                  'WITA: $convertedWITA',
-                  style: const TextStyle(fontSize: 25),
-                ),
-                Text(
-                  'WIT: $convertedWIT',
-                  style: const TextStyle(fontSize: 25),
-                ),
-              ]
-            ],
+                if (selectedTime != null) ...[
+                  Text(
+                    'Waktu Terpilih: ${DateFormat('HH:mm').format(selectedTime!)}',
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'WIB: $convertedWIB',
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                  Text(
+                    'WITA: $convertedWITA',
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                  Text(
+                    'WIT: $convertedWIT',
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                ]
+              ],
+            ),
           ),
         ),
       ),

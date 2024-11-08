@@ -16,10 +16,10 @@ class ProfilePage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Homepage(),
+                    builder: (context) => const Homepage(),
                   ));
             },
-            child: Container(
+            child: const SizedBox(
               height: 80,
               child: Icon(Icons.home),
             ),
@@ -30,10 +30,10 @@ class ProfilePage extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfilePage(),
+                    builder: (context) => const ProfilePage(),
                   ));
             },
-            child: Container(
+            child: const SizedBox(
               height: 80,
               child: Icon(Icons.person),
             ),
